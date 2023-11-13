@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: kafka-streams-poc
+  cloud:
+    stream:
+      bindings:
+        eventConsumer-in-0:
+          destination: my-topic
+          group: group-eventConsumer
+        eventProcess-in-0:
+          destination: my-topic
+          group: group-eventProcess
+        eventProcess-out-0:
+          destination: my-topic-stream
+      kafka:
+        streams:
+          binder:
+            auto-create-topics: true
+            functions:
+              eventConsumer:
+                application-id: kafka-streams-poc-eventConsumer
+              eventProcess:
+                application-id: kafka-streams-eventProcess
+    function:
+      definition: eventProcess;eventConsumer
+server:
+  port: 8091
+
+              
+
+
+            
