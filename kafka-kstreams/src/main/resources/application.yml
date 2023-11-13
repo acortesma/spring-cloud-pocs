@@ -13,9 +13,11 @@ spring:
         eventProcess-out-0:
           destination: my-topic-stream
       kafka:
+        binder:
+          brokers: localhost:9092
+          auto-create-topics: true
         streams:
           binder:
-            auto-create-topics: true
             functions:
               eventConsumer:
                 application-id: kafka-streams-poc-eventConsumer
@@ -26,7 +28,6 @@ spring:
 server:
   port: 8091
 
-              
-
-
-            
+logging:
+  pattern:
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %highlight(-%5p -) %clr(${spring.application.name}){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
