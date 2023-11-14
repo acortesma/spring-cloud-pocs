@@ -1,4 +1,4 @@
-# poc-spring-cloud-kafka-kstreams
+# poc-spring-cloud-kafka-reactive-stream
 This project connects to kafka to read and send events. This project contains:
 - Basic configuration to connect to kafka.
 - Two topics defined by configuration: "my-topic" and "my-topic-stream". And two processes that consume from the same input topic "my-topic".

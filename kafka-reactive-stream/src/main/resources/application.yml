@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: kafka-streams-poc
+  cloud:
+    stream:
+      bindings:
+        eventConsumer-in-0:
+          destination: my-topic
+          group: group-eventConsumer
+        eventProcess-in-0:
+          destination: my-topic
+          group: group-eventProcess
+        eventProcess-out-0:
+          destination: my-topic-stream
+      kafka:
+        binder:
+          brokers: localhost:9092
+          #auto-create-topics: true
+          #enableObservation: true #no funciona por ahora: bug
+        streams:
+          binder:
+            functions:
+              eventConsumer:
+                application-id: kafka-streams-poc-eventConsumer
+              eventProcess:
+                application-id: kafka-streams-eventProcess
+    function:
+      definition: eventProcess;eventConsumer
+server:
+  port: 8091
+
+logging:
+  pattern:
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %highlight(-%5p -) %clr(${spring.application.name}){faint} [%X{traceId:-} - %X{spanId:-}]  %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
